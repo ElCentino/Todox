@@ -1,0 +1,7 @@
+#Fri Aug 16 17:12:53 PDT 2019
+base.0=/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/dex/debug/mergeExtDexDebug/out/classes.dex
+path.1=classes.dex
+renamed.1=classes2.dex
+path.0=classes.dex
+renamed.0=classes.dex
+base.1=/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex

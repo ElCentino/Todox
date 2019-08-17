@@ -1,0 +1,2 @@
+rootProject.name='TodoX'
+include ':app', ':sweetalert'

@@ -1,0 +1,511 @@
+package com.example.todox;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
+
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.example.todox.fragments.CompletedTasksFragment;
+import com.example.todox.fragments.TasksFragment;
+import com.example.todox.interfaces.RequestAction;
+import com.example.todox.interfaces.TodoViewed;
+import com.example.todox.models.TodoItem;
+import com.example.todox.services.ApplicationServices;
+import com.example.todox.services.TodoServices;
+import com.example.todox.utils.StructuredResponse;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.infideap.drawerbehavior.Advance3DDrawerLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, TodoViewed, NavigationView.OnNavigationItemSelectedListener, RequestAction {
+
+    private Toolbar toolbar;
+    private Advance3DDrawerLayout mDrawerLayout;
+    private BottomNavigationView add_todo_layout_bottom_nav;
+    private List<TodoItem> mTodoItems;
+    private RelativeLayout fragment_container_content;
+
+    private FrameLayout add_todo_layout;
+    private FrameLayout view_todo_layout;
+    private BottomSheetBehavior add_todo_layout_bottom_sheet;
+    private BottomSheetBehavior view_todo_layout_bottom_sheet;
+    private MaterialButton mClear_add_todo_controls;
+    private MaterialProgressBar header_progressbar;
+    private TextInputEditText mTv_todo_title;
+    private TextInputLayout mTv_todo_title_border;
+    private TextInputEditText mTv_todo_description;
+    private TextInputLayout mTv_todo_description_border;
+    private TextInputEditText mTv_view_title;
+    private TextInputLayout mTv_view_title_border;
+    private TextInputEditText mTv_view_description;
+    private TextInputLayout mTv_view_description_border;
+    private LinearLayout view_todo_edit_pane;
+    private boolean editMode;
+    private NavigationView mNav_view_main;
+
+    private TodoServices mTodoServices;
+    private ImageView mView_todo_layout_edit;
+
+    private String tempTitle;
+    private String tempDescription;
+    private TasksFragment mTasksFragment;
+    private InputMethodManager mImm;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        initToolbar();
+        initDrawer();
+        initAddTodoLayout();
+        initViewEditTodoLayout();
+
+        header_progressbar = findViewById(R.id.header_progressbar);
+        header_progressbar.getShowProgressBackground();
+
+        add_todo_layout_bottom_nav = findViewById(R.id.bottom_nav);
+        add_todo_layout_bottom_nav.setOnNavigationItemSelectedListener(this);
+
+        fragment_container_content = findViewById(R.id.fragment_container_content);
+
+        mNav_view_main = findViewById(R.id.nav_view_main);
+        mNav_view_main.setNavigationItemSelectedListener(this);
+
+        mTodoServices = ApplicationServices.WebService.getInstance().create(TodoServices.class);
+
+        getTodos();
+
+    }
+
+    private void getTodos() {
+
+        mTodoServices.GetTodos(ApplicationServices.WebService.getAuthToken()).enqueue(new Callback<List<TodoItem>>() {
+            @Override
+            public void onResponse(Call<List<TodoItem>> call, Response<List<TodoItem>> response) {
+
+                if(response == null) {
+                    Snackbar.make(findViewById(android.R.id.content), "No Internet Connection", Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+
+                List<TodoItem> items = response.body();
+                mTodoItems = items;
+                TasksFragment tasksFragment = new TasksFragment((ArrayList<TodoItem>) items);
+                tasksFragment.setTodoViewed(MainActivity.this);
+//                tasksFragment.setRequestAction(MainActivity.this);
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, tasksFragment).commit();
+
+                if(items.size() == 0) {
+                    fragment_container_content.setVisibility(View.VISIBLE);
+                } else {
+                    fragment_container_content.setVisibility(View.INVISIBLE);
+                }
+
+                header_progressbar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<List<TodoItem>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void addTodo(TodoItem todoItem) {
+
+        mTodoServices.AddTodo(ApplicationServices.WebService.getAuthToken(), todoItem).enqueue(new Callback<StructuredResponse>() {
+            @Override
+            public void onResponse(Call<StructuredResponse> call, Response<StructuredResponse> response) {
+
+                if(response == null) {
+                    Snackbar.make(findViewById(android.R.id.content), "No Internet Connection", Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+
+                try {
+                    StructuredResponse structuredResponse = response.body();
+
+                    if(structuredResponse.status == (int)ApplicationServices.Constants.SUCCESS.getValue()) {
+                        getTodos();
+                        header_progressbar.setVisibility(View.INVISIBLE);
+
+                        mImm = (InputMethodManager)getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
+                        mImm.hideSoftInputFromWindow(findViewById(android.R.id.content).getWindowToken(), 0);
+
+                        add_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_HIDDEN);
+                        Snackbar.make(findViewById(android.R.id.content), "Todo added :D", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        }).show();
+                    }
+                }
+                catch (Exception e) {
+
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<StructuredResponse> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void initToolbar() {
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+
+            Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_menu_black_24dp, null);
+            if (drawable == null) return;
+
+            drawable = DrawableCompat.wrap(drawable);
+            DrawableCompat.setTint(drawable, Color.WHITE);
+
+            getSupportActionBar().setHomeAsUpIndicator(drawable);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    private void initDrawer() {
+
+        mDrawerLayout = findViewById(R.id.drawer);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        mDrawerLayout.setViewScale(Gravity.START, 0.9f);
+        mDrawerLayout.setViewElevation(Gravity.START, 20);
+        mDrawerLayout.setRadius(Gravity.START, 25);//set end container's corner radius (dimension)
+//        drawer.setViewRotation(Gravity.START, 15); // MAKES IT 3D
+
+        mDrawerLayout.useCustomBehavior(Gravity.START); //assign custom behavior for "Left" drawer
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.menu_add_todo:
+
+                if(view_todo_layout_bottom_sheet.getState() != BottomSheetBehavior.STATE_HIDDEN) {
+                    view_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
+
+                if(add_todo_layout_bottom_sheet.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                    return true;
+                }
+
+                add_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        Fragment selectedFragment = null;
+
+        switch (menuItem.getItemId()) {
+
+            case R.id.nav_home:
+                mTasksFragment = new TasksFragment((ArrayList<TodoItem>)mTodoItems);
+                mTasksFragment.setTodoViewed(this);
+//                mTasksFragment.setRequestAction(this);
+                selectedFragment = mTasksFragment;
+                break;
+
+            case R.id.nav_completed:
+                selectedFragment = new CompletedTasksFragment();
+                break;
+
+        }
+
+        if(selectedFragment == null) return false;
+
+        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        }
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+
+        return true;
+    }
+
+
+    private void initViewEditTodoLayout() {
+
+        mTv_view_title = findViewById(R.id.tv_view_title);
+        mTv_view_title.setEnabled(false);
+        mTv_view_title_border = findViewById(R.id.tv_view_title_border);
+
+        mTv_view_description = findViewById(R.id.tv_view_description);
+        mTv_view_description.setEnabled(false);
+        mTv_view_description_border = findViewById(R.id.tv_view_description_border);
+
+        mView_todo_layout_edit = findViewById(R.id.view_todo_layout_edit);
+
+
+        view_todo_layout = findViewById(R.id.view_todo_layout);
+        view_todo_layout_bottom_sheet = BottomSheetBehavior.from(view_todo_layout);
+        view_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        view_todo_edit_pane = findViewById(R.id.view_todo_edit_pane);
+
+        view_todo_layout_bottom_sheet.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View view, int i) {
+
+                if(i == BottomSheetBehavior.STATE_HIDDEN) {
+                    findViewById(R.id.bottom_sheet_shadow_view).setVisibility(View.INVISIBLE);
+                } else {
+                    findViewById(R.id.bottom_sheet_shadow_view).setVisibility(View.VISIBLE);
+                }
+
+                if(i == BottomSheetBehavior.STATE_EXPANDED) {
+
+                    view.findViewById(R.id.shadow_view).setVisibility(View.VISIBLE);
+
+                } else {
+                    view.findViewById(R.id.shadow_view).setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View view, float v) {
+
+            }
+        });
+
+        findViewById(R.id.view_todo_layout_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_HIDDEN);
+            }
+        });
+
+        findViewById(R.id.clear_view_todo_controls).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mTv_view_title.setText("");
+                mTv_view_description.setText("");
+                mTv_view_title_border.clearFocus();
+                mTv_view_description_border.clearFocus();
+            }
+        });
+
+        mView_todo_layout_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggleTodoEditMode();
+            }
+        });
+    }
+
+    private void initAddTodoLayout() {
+
+        add_todo_layout = findViewById(R.id.add_todo_layout);
+        add_todo_layout_bottom_sheet = BottomSheetBehavior.from(add_todo_layout);
+        add_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        mTv_todo_title = findViewById(R.id.tv_todo_title);
+        mTv_todo_title_border = findViewById(R.id.tv_todo_title_border);
+
+        mTv_todo_description = findViewById(R.id.tv_todo_description);
+        mTv_todo_description_border = findViewById(R.id.tv_todo_description_border);
+
+        mClear_add_todo_controls = findViewById(R.id.clear_add_todo_controls);
+        mClear_add_todo_controls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mTv_todo_title.setText("");
+                mTv_todo_description.setText("");
+                mTv_todo_title_border.clearFocus();
+                mTv_todo_description_border.clearFocus();
+            }
+        });
+
+        add_todo_layout_bottom_sheet.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View view, int i) {
+
+                if(i == BottomSheetBehavior.STATE_HIDDEN) {
+                    findViewById(R.id.bottom_sheet_shadow).setVisibility(View.INVISIBLE);
+                } else {
+                    findViewById(R.id.bottom_sheet_shadow).setVisibility(View.VISIBLE);
+                }
+
+                if(i == BottomSheetBehavior.STATE_EXPANDED) {
+
+                    view.findViewById(R.id.shadow_view).setVisibility(View.VISIBLE);
+
+                } else {
+                    view.findViewById(R.id.shadow_view).setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View view, float v) {
+
+            }
+        });
+
+
+        findViewById(R.id.add_todo_layout_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                add_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_HIDDEN);
+            }
+        });
+
+        findViewById(R.id.btn_add_todo).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                String title = mTv_todo_title.getText().toString();
+                String description = mTv_todo_description.getText().toString();
+
+                if(title.isEmpty()) {
+                    mTv_todo_title_border.setError("Title is required");
+                    return;
+                }
+
+                if(description.isEmpty()) {
+                    mTv_todo_description_border.setError("Description is required");
+                    return;
+                }
+                header_progressbar.setVisibility(View.VISIBLE);
+
+                TodoItem todoItem = new TodoItem();
+                todoItem.setId(UUID.randomUUID().toString());
+                todoItem.setTitle(title);
+                todoItem.setDescription(description);
+
+                addTodo(todoItem);
+            }
+        });
+    }
+
+    private void toggleTodoEditMode() {
+
+        editMode = !editMode;
+
+        if(editMode) {
+
+            tempTitle = mTv_view_title.getText().toString();
+            tempDescription = mTv_view_description.getText().toString();
+
+            mTv_view_title.setEnabled(true);
+            mTv_view_description.setEnabled(true);
+            view_todo_edit_pane.setVisibility(View.VISIBLE);
+            mView_todo_layout_edit.setImageDrawable(getResources().getDrawable(R.drawable.ic_cancel_white_24dp));
+
+        } else {
+            mTv_view_title.setText(tempTitle);
+            mTv_view_description.setText(tempDescription);
+
+            tempTitle = "";
+            tempDescription = "";
+
+            mTv_view_title.setEnabled(false);
+            mTv_view_description.setEnabled(false);
+            view_todo_edit_pane.setVisibility(View.INVISIBLE);
+            mView_todo_layout_edit.setImageDrawable(getResources().getDrawable(R.drawable.ic_edit_black_24dp));
+        }
+    }
+
+    @Override
+    public void onTodoViewed(TodoItem todoItem) {
+
+        if(add_todo_layout_bottom_sheet.getState() != BottomSheetBehavior.STATE_HIDDEN) {
+
+            add_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_HIDDEN);
+        }
+
+        mTv_view_title.setText(todoItem.getTitle());
+        mTv_view_description.setText(todoItem.getDescription());
+        view_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
+
+    @Override
+    public void onTodoDeleted(TodoItem todoItem) {
+
+        Toast.makeText(this, "DELETED", Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onRequestStart(Object object) {
+        header_progressbar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onRequestEnd(Object object) {
+        header_progressbar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onRequestComplete(ApplicationServices.Constants constant) {
+
+        switch (constant) {
+
+            case REQUESTEND_RELOAD:
+                getTodos();
+                break;
+        }
+    }
+}

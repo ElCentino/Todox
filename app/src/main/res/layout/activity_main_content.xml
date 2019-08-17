@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/toolbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:title="Todo X"
+            app:titleTextColor="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorAmbient"
+            android:fitsSystemWindows="true"
+            android:layout_alignParentTop="true" />
+
+        <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+            android:id="@+id/header_progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:mpb_progressStyle="horizontal"
+            android:secondaryProgress="60"
+            android:indeterminate="true"
+            app:mpb_useIntrinsicPadding="false"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal.NoPadding" />
+
+        <View
+            android:id="@+id/shadow_view"
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:layout_height="2dp"
+            android:background="@drawable/drawable_toolbar_shadow" />
+
+    </LinearLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_container"
+        android:background="@android:color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+            <FrameLayout android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/bottom_nav_container">
+
+                <RelativeLayout
+                    android:id="@+id/fragment_container_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/center_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="200dp"
+                            android:src="@drawable/no_list"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#B0B0B0"
+                            android:textSize="30sp"
+                            android:text="You have no todos"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/bottom_nav_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical">
+
+                <View
+                    android:id="@+id/shadow_view_bottom"
+                    android:layout_width="match_parent"
+                    android:visibility="visible"
+                    android:layout_height="1dp"
+                    android:background="@drawable/drawable_toolbar_shadow" />
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/bottom_nav"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:itemTextColor="@drawable/drawable_navstates"
+                    app:itemIconTint="@drawable/drawable_navstates"
+                    app:itemTextAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="bottom"
+                    android:fitsSystemWindows="true"
+                    app:menu="@menu/menu_bottom_nav" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/bottom_sheet_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/shape_gradient_top_shadow"
+            android:visibility="invisible"
+            app:layout_anchor="@id/add_todo_layout" />
+
+        <FrameLayout
+            android:id="@+id/add_todo_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:behavior_hideable="true"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            style="@style/BottomSheetStyle">
+
+            <include layout="@layout/layout_bs_add_todo" />
+
+        </FrameLayout>
+
+        <View
+            android:id="@+id/bottom_sheet_shadow_view"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/shape_gradient_top_shadow"
+            android:visibility="invisible"
+            app:layout_anchor="@id/view_todo_layout" />
+
+        <FrameLayout
+            android:id="@+id/view_todo_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:behavior_hideable="true"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            style="@style/BottomSheetStyle">
+
+            <include layout="@layout/layout_bs_view_edit_todo" />
+
+        </FrameLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</RelativeLayout>
+
