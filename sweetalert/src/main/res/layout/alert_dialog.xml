@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:wheel="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
     android:id="@+id/loading"
     android:layout_width="@dimen/alert_width"
     android:layout_height="wrap_content"
@@ -146,8 +145,6 @@
         android:gravity="center">
 
         <Button
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:id="@+id/cancel_button"
             style="@style/dialog_blue_button"
             android:background="@drawable/gray_button_background"
@@ -155,13 +152,9 @@
             android:visibility="gone"
             android:text="@string/dialog_cancel" />
 
-
         <Button
             android:id="@+id/confirm_button"
             style="@style/dialog_blue_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:backgroundTint="@color/red_btn_bg_color"
             android:text="@string/dialog_ok" />
     </LinearLayout>
 </LinearLayout>

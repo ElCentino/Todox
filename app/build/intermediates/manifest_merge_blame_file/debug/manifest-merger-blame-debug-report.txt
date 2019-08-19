@@ -21,29 +21,31 @@
 15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 15-->[androidx.core:core:1.0.1] /Users/richardpryce/.gradle/caches/transforms-2/files-2.1/c9abde3d00d5c35e349279d839666d3e/core-1.0.1/AndroidManifest.xml:22:18-86
 16        android:debuggable="true"
-17        android:label="@string/app_name"
-17-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:9:9-41
-18        android:roundIcon="@mipmap/ic_launcher_round"
-18-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:10:9-54
-19        android:supportsRtl="true"
-19-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:11:9-35
-20        android:testOnly="true"
-21        android:theme="@style/AppTheme" >
-21-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:12:9-40
-22        <activity android:name="com.example.todox.MainActivity" >
-22-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:13:9-19:20
-22-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:13:19-47
-23            <intent-filter>
-23-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:14:13-18:29
-24                <action android:name="android.intent.action.MAIN" />
-24-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:15:17-69
-24-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:15:25-66
-25
-26                <category android:name="android.intent.category.LAUNCHER" />
-26-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:17:17-77
-26-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:17:27-74
-27            </intent-filter>
-28        </activity>
-29    </application>
-30
-31</manifest>
+17        android:icon="@drawable/ic_launcher"
+17-->[com.pnikosis:materialish-progress:1.0] /Users/richardpryce/.gradle/caches/transforms-2/files-2.1/f86242e400328998259f321005daab45/materialish-progress-1.0/AndroidManifest.xml:13:9-45
+18        android:label="@string/app_name"
+18-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:9:9-41
+19        android:roundIcon="@mipmap/ic_launcher_round"
+19-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:10:9-54
+20        android:supportsRtl="true"
+20-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:11:9-35
+21        android:testOnly="true"
+22        android:theme="@style/AppTheme" >
+22-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:12:9-40
+23        <activity android:name="com.example.todox.MainActivity" >
+23-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:13:9-19:20
+23-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:13:19-47
+24            <intent-filter>
+24-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:14:13-18:29
+25                <action android:name="android.intent.action.MAIN" />
+25-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:15:17-69
+25-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:15:25-66
+26
+27                <category android:name="android.intent.category.LAUNCHER" />
+27-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:17:17-77
+27-->/Users/richardpryce/Documents/workspace/TodoX/app/src/main/AndroidManifest.xml:17:27-74
+28            </intent-filter>
+29        </activity>
+30    </application>
+31
+32</manifest>

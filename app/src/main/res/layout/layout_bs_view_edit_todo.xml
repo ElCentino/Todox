@@ -134,14 +134,12 @@
                     android:layout_weight="10"/>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/clear_view_todo_controls"
+                    android:id="@+id/edit_view_todo_controls"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Clear"
+                    android:text="@string/edit"
                     android:layout_gravity="center"/>
-
             </LinearLayout>
-
 
         </LinearLayout>
 

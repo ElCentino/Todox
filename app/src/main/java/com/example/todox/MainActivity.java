@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,6 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private Advance3DDrawerLayout mDrawerLayout;
     private BottomNavigationView add_todo_layout_bottom_nav;
     private List<TodoItem> mTodoItems;
+    private List<TodoItem> mCompletedTodoItems;
     private RelativeLayout fragment_container_content;
 
     private FrameLayout add_todo_layout;
@@ -80,8 +83,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private String tempTitle;
     private String tempDescription;
+    private String tempId;
     private TasksFragment mTasksFragment;
     private InputMethodManager mImm;
+    private CompletedTasksFragment mCompletedTasksFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,14 +112,20 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mTodoServices = ApplicationServices.WebService.getInstance().create(TodoServices.class);
 
         getTodos();
+        getCompletedTodos();
 
     }
 
     private void getTodos() {
 
+        onRequestStart(null);
+
         mTodoServices.GetTodos(ApplicationServices.WebService.getAuthToken()).enqueue(new Callback<List<TodoItem>>() {
+
             @Override
             public void onResponse(Call<List<TodoItem>> call, Response<List<TodoItem>> response) {
+
+                onRequestEnd(null);
 
                 if(response == null) {
                     Snackbar.make(findViewById(android.R.id.content), "No Internet Connection", Snackbar.LENGTH_LONG).show();
@@ -128,6 +139,46 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 //                tasksFragment.setRequestAction(MainActivity.this);
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, tasksFragment).commit();
+
+                if(items.size() == 0) {
+                    fragment_container_content.setVisibility(View.VISIBLE);
+                } else {
+                    fragment_container_content.setVisibility(View.INVISIBLE);
+                }
+
+                header_progressbar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<List<TodoItem>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getCompletedTodos() {
+
+        onRequestStart(null);
+
+        mTodoServices.GetCompletedTodods(ApplicationServices.WebService.getAuthToken()).enqueue(new Callback<List<TodoItem>>() {
+
+            @Override
+            public void onResponse(Call<List<TodoItem>> call, Response<List<TodoItem>> response) {
+
+                onRequestEnd(null);
+
+                if(response == null) {
+                    Snackbar.make(findViewById(android.R.id.content), "No Internet Connection", Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+
+                List<TodoItem> items = response.body();
+                mCompletedTodoItems = items;
+                CompletedTasksFragment completedTasksFragment = new CompletedTasksFragment((ArrayList<TodoItem>) items);
+                completedTasksFragment.setTodoViewed(MainActivity.this);
+//                tasksFragment.setRequestAction(MainActivity.this);
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, completedTasksFragment).commit();
 
                 if(items.size() == 0) {
                     fragment_container_content.setVisibility(View.VISIBLE);
@@ -178,8 +229,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 catch (Exception e) {
 
                 }
-
-
             }
 
             @Override
@@ -194,6 +243,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         if (getSupportActionBar() != null) {
 
             Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_menu_black_24dp, null);
@@ -263,14 +313,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         switch (menuItem.getItemId()) {
 
             case R.id.nav_home:
+                if(mTodoItems == null) return false;
                 mTasksFragment = new TasksFragment((ArrayList<TodoItem>)mTodoItems);
                 mTasksFragment.setTodoViewed(this);
-//                mTasksFragment.setRequestAction(this);
                 selectedFragment = mTasksFragment;
+                getTodos();
                 break;
 
             case R.id.nav_completed:
-                selectedFragment = new CompletedTasksFragment();
+                if(mCompletedTodoItems == null) return false;
+                mCompletedTasksFragment = new CompletedTasksFragment((ArrayList<TodoItem>) mCompletedTodoItems);
+                mCompletedTasksFragment.setTodoViewed(this);
+                selectedFragment = mCompletedTasksFragment;
+                getCompletedTodos();
                 break;
 
         }
@@ -338,13 +393,33 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             }
         });
 
-        findViewById(R.id.clear_view_todo_controls).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.edit_view_todo_controls).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mTv_view_title.setText("");
-                mTv_view_description.setText("");
-                mTv_view_title_border.clearFocus();
-                mTv_view_description_border.clearFocus();
+
+                onRequestStart(null);
+
+                TodoItem todoItem = new TodoItem();
+                todoItem.setId(tempId);
+                todoItem.setTitle(mTv_view_title.getText().toString());
+                todoItem.setDescription(mTv_view_description.getText().toString());
+
+                mTodoServices.UpdateTodo(ApplicationServices.WebService.getAuthToken(), todoItem).enqueue(new Callback<StructuredResponse>() {
+                    @Override
+                    public void onResponse(Call<StructuredResponse> call, Response<StructuredResponse> response) {
+
+                        onRequestEnd(null);
+                        onRequestComplete(ApplicationServices.Constants.REQUESTEND_RELOAD);
+
+                        view_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_HIDDEN);
+                        onRequestCompleteMessage("Todo Edited");
+                    }
+
+                    @Override
+                    public void onFailure(Call<StructuredResponse> call, Throwable t) {
+                        onRequestCompleteMessage("Action Failed");
+                    }
+                });
             }
         });
 
@@ -416,26 +491,45 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             @Override
             public void onClick(View view) {
-                String title = mTv_todo_title.getText().toString();
-                String description = mTv_todo_description.getText().toString();
 
-                if(title.isEmpty()) {
-                    mTv_todo_title_border.setError("Title is required");
-                    return;
-                }
+                SweetAlertDialog dialog = new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE)
+                        .setContentText("Add This Todo")
+                        .setCancelText("Cancel")
+                        .setConfirmText("Add")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
 
-                if(description.isEmpty()) {
-                    mTv_todo_description_border.setError("Description is required");
-                    return;
-                }
-                header_progressbar.setVisibility(View.VISIBLE);
+                                String title = mTv_todo_title.getText().toString();
+                                String description = mTv_todo_description.getText().toString();
 
-                TodoItem todoItem = new TodoItem();
-                todoItem.setId(UUID.randomUUID().toString());
-                todoItem.setTitle(title);
-                todoItem.setDescription(description);
+                                if(title.isEmpty()) {
+                                    mTv_todo_title_border.setError("Title is required");
+                                    return;
+                                }
 
-                addTodo(todoItem);
+                                if(description.isEmpty()) {
+                                    mTv_todo_description_border.setError("Description is required");
+                                    return;
+                                }
+                                header_progressbar.setVisibility(View.VISIBLE);
+
+                                TodoItem todoItem = new TodoItem();
+                                todoItem.setId(UUID.randomUUID().toString());
+                                todoItem.setTitle(title);
+                                todoItem.setDescription(description);
+
+                                addTodo(todoItem);
+                            }
+                        })
+                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+                            }
+                        });
+
+                dialog.show();
             }
         });
     }
@@ -478,14 +572,49 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         mTv_view_title.setText(todoItem.getTitle());
         mTv_view_description.setText(todoItem.getDescription());
+        tempId = todoItem.getId();
         view_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     @Override
-    public void onTodoDeleted(TodoItem todoItem) {
+    public void onTodoDeleted(final TodoItem todoItem) {
 
-        Toast.makeText(this, "DELETED", Toast.LENGTH_LONG).show();
 
+
+        SweetAlertDialog dialog = new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE)
+                .setContentText("Add This Todo")
+                .setCancelText("Cancel")
+                .setConfirmText("Add")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                        onRequestStart(null);
+
+                        mTodoServices.DeleteTodo(ApplicationServices.WebService.getAuthToken(), todoItem.getId()).enqueue(new Callback<StructuredResponse>() {
+                            @Override
+                            public void onResponse(Call<StructuredResponse> call, Response<StructuredResponse> response) {
+
+                                onRequestEnd(null);
+                                onRequestComplete(ApplicationServices.Constants.REQUESTEND_RELOAD);
+                                onRequestCompleteMessage("Todo Deleted");
+                            }
+
+                            @Override
+                            public void onFailure(Call<StructuredResponse> call, Throwable t) {
+                                onRequestCompleteMessage("Action Failed");
+                            }
+                        });
+                    }
+                })
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismiss();
+                    }
+                });
+
+        dialog.show();
     }
 
     @Override
@@ -507,5 +636,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 getTodos();
                 break;
         }
+    }
+
+    @Override
+    public void onRequestCompleteMessage(String message) {
+        Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
     }
 }

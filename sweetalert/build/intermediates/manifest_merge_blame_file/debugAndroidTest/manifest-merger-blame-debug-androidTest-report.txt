@@ -3,40 +3,40 @@
 3    package="cn.pedant.SweetAlert.test" >
 4
 5    <uses-sdk
-5-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2887273152273348240.xml:5:5-74
-6        android:minSdkVersion="14"
-6-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2887273152273348240.xml:5:15-41
-7        android:targetSdkVersion="14" />
-7-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2887273152273348240.xml:5:42-71
+5-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger8093829578918817185.xml:5:5-74
+6        android:minSdkVersion="21"
+6-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger8093829578918817185.xml:5:15-41
+7        android:targetSdkVersion="21" />
+7-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger8093829578918817185.xml:5:42-71
 8
 9    <instrumentation
-9-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2887273152273348240.xml:11:5-15:75
+9-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger8093829578918817185.xml:11:5-15:75
 10        android:name="android.test.InstrumentationTestRunner"
-10-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2887273152273348240.xml:11:22-75
+10-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger8093829578918817185.xml:11:22-75
 11        android:functionalTest="false"
-11-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2887273152273348240.xml:14:22-52
+11-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger8093829578918817185.xml:14:22-52
 12        android:handleProfiling="false"
-12-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2887273152273348240.xml:13:22-53
+12-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger8093829578918817185.xml:13:22-53
 13        android:label="Tests for cn.pedant.SweetAlert.test"
-13-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2887273152273348240.xml:15:22-73
+13-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger8093829578918817185.xml:15:22-73
 14        android:targetPackage="cn.pedant.SweetAlert.test" />
-14-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2887273152273348240.xml:12:22-71
+14-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger8093829578918817185.xml:12:22-71
 15
 16    <application
-16-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2887273152273348240.xml:7:5-9:19
+16-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger8093829578918817185.xml:7:5-9:19
 17        android:allowBackup="true"
 17-->[com.pnikosis:materialish-progress:1.0] /Users/richardpryce/.gradle/caches/transforms-2/files-2.1/f86242e400328998259f321005daab45/materialish-progress-1.0/AndroidManifest.xml:12:9-35
 18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 18-->[androidx.core:core:1.0.0] /Users/richardpryce/.gradle/caches/transforms-2/files-2.1/b774c8ccf9873e33e0a1a589e148ef74/core-1.0.0/AndroidManifest.xml:22:18-86
 19        android:debuggable="true"
-19-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2887273152273348240.xml:7:18-43
+19-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger8093829578918817185.xml:7:18-43
 20        android:icon="@drawable/ic_launcher"
 20-->[com.pnikosis:materialish-progress:1.0] /Users/richardpryce/.gradle/caches/transforms-2/files-2.1/f86242e400328998259f321005daab45/materialish-progress-1.0/AndroidManifest.xml:13:9-45
 21        android:label="@string/app_name" >
 21-->[com.pnikosis:materialish-progress:1.0] /Users/richardpryce/.gradle/caches/transforms-2/files-2.1/f86242e400328998259f321005daab45/materialish-progress-1.0/AndroidManifest.xml:14:9-41
 22        <uses-library android:name="android.test.runner" />
-22-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2887273152273348240.xml:8:9-60
-22-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2887273152273348240.xml:8:23-57
+22-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger8093829578918817185.xml:8:9-60
+22-->/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger8093829578918817185.xml:8:23-57
 23    </application>
 24
 25</manifest>

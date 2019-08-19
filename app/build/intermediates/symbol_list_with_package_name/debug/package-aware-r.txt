@@ -90,7 +90,10 @@ attr backgroundSplit
 attr backgroundStacked
 attr backgroundTint
 attr backgroundTintMode
+attr barColor
 attr barLength
+attr barSpinCycleTime
+attr barWidth
 attr barrierAllowsGoneWidgets
 attr barrierDirection
 attr behavior_autoHide
@@ -158,6 +161,7 @@ attr chipStartPadding
 attr chipStrokeColor
 attr chipStrokeWidth
 attr chipStyle
+attr circleRadius
 attr closeIcon
 attr closeIconEnabled
 attr closeIconEndPadding
@@ -207,8 +211,6 @@ attr counterMaxLength
 attr counterOverflowTextAppearance
 attr counterTextAppearance
 attr customNavigationLayout
-attr customPivotX
-attr customPivotY
 attr defaultQueryHint
 attr dialogCornerRadius
 attr dialogPreferredPadding
@@ -251,6 +253,7 @@ attr fastScrollHorizontalThumbDrawable
 attr fastScrollHorizontalTrackDrawable
 attr fastScrollVerticalThumbDrawable
 attr fastScrollVerticalTrackDrawable
+attr fillRadius
 attr firstBaselineToTopHeight
 attr floatingActionButtonStyle
 attr font
@@ -389,16 +392,6 @@ attr listPreferredItemPaddingLeft
 attr listPreferredItemPaddingRight
 attr logo
 attr logoDescription
-attr matProg_barColor
-attr matProg_barSpinCycleTime
-attr matProg_barWidth
-attr matProg_circleRadius
-attr matProg_fillRadius
-attr matProg_linearProgress
-attr matProg_progressIndeterminate
-attr matProg_rimColor
-attr matProg_rimWidth
-attr matProg_spinSpeed
 attr materialButtonStyle
 attr materialCardViewStyle
 attr maxActionInlineWidth
@@ -438,6 +431,8 @@ attr passwordToggleDrawable
 attr passwordToggleEnabled
 attr passwordToggleTint
 attr passwordToggleTintMode
+attr pivotX
+attr pivotY
 attr popupMenuStyle
 attr popupTheme
 attr popupWindowStyle
@@ -445,6 +440,7 @@ attr preserveIconSpacing
 attr pressedTranslationZ
 attr progressBarPadding
 attr progressBarStyle
+attr progressIndeterminate
 attr queryBackground
 attr queryHint
 attr radioButtonStyle
@@ -452,6 +448,8 @@ attr ratingBarStyle
 attr ratingBarStyleIndicator
 attr ratingBarStyleSmall
 attr reverseLayout
+attr rimColor
+attr rimWidth
 attr rippleColor
 attr rollType
 attr scrimAnimationDuration
@@ -475,6 +473,7 @@ attr snackbarButtonStyle
 attr snackbarStyle
 attr spanCount
 attr spinBars
+attr spinSpeed
 attr spinnerDropDownItemStyle
 attr spinnerStyle
 attr splitTrack
@@ -496,9 +495,6 @@ attr subtitleTextAppearance
 attr subtitleTextColor
 attr subtitleTextStyle
 attr suggestionRowLayout
-attr sweet_alert_bg_drawable
-attr sweet_alert_content_text_color
-attr sweet_alert_title_text_color
 attr switchMinWidth
 attr switchPadding
 attr switchStyle
@@ -658,7 +654,6 @@ color colorPrimary
 color colorPrimaryDark
 color colorToolbar
 color colorWhite
-color custom_float_bg
 color design_bottom_navigation_shadow_color
 color design_default_color_primary
 color design_default_color_primary_dark
@@ -686,18 +681,6 @@ color gray_btn_bg_color
 color gray_btn_bg_pressed_color
 color highlighted_text_material_dark
 color highlighted_text_material_light
-color main_blue_color
-color main_blue_stroke_color
-color main_cyan_color
-color main_cyan_stroke_color
-color main_disabled_color
-color main_disabled_stroke_color
-color main_green_color
-color main_green_stroke_color
-color main_orange_color
-color main_orange_light_color
-color main_orange_light_stroke_color
-color main_orange_stroke_color
 color material_blue_grey_80
 color material_blue_grey_800
 color material_blue_grey_90
@@ -715,8 +698,6 @@ color material_grey_600
 color material_grey_800
 color material_grey_850
 color material_grey_900
-color message_color
-color message_color_dark
 color mtrl_bottom_nav_colored_item_tint
 color mtrl_bottom_nav_item_tint
 color mtrl_btn_bg_color_disabled
@@ -763,7 +744,6 @@ color secondary_text_disabled_material_dark
 color secondary_text_disabled_material_light
 color success_stroke_color
 color sweet_dialog_bg_color
-color sweet_dialog_bg_color_dark
 color switch_thumb_disabled_material_dark
 color switch_thumb_disabled_material_light
 color switch_thumb_material_dark
@@ -771,8 +751,6 @@ color switch_thumb_material_light
 color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
 color text_color
-color title_color
-color title_color_dark
 color tooltip_background_dark
 color tooltip_background_light
 color trans_success_stroke_color
@@ -853,7 +831,6 @@ dimen abc_text_size_subtitle_material_toolbar
 dimen abc_text_size_title_material
 dimen abc_text_size_title_material_toolbar
 dimen alert_width
-dimen buttons_stroke_width
 dimen cardview_compat_inset_shadow
 dimen cardview_default_elevation
 dimen cardview_default_radius
@@ -865,7 +842,6 @@ dimen compat_button_padding_vertical_material
 dimen compat_control_corner_material
 dimen compat_notification_large_icon_max_height
 dimen compat_notification_large_icon_max_width
-dimen custom_image_size
 dimen design_appbar_elevation
 dimen design_bottom_navigation_active_item_max_width
 dimen design_bottom_navigation_active_item_min_width
@@ -1098,13 +1074,11 @@ drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
 drawable dialog_background
-drawable dialog_background_dark
 drawable drawable_navstates
 drawable drawable_toolbar_shadow
 drawable error_center_x
 drawable error_circle
 drawable gray_button_background
-drawable green_button_background
 drawable ic_add_black_24dp
 drawable ic_add_white_24dp
 drawable ic_cancel_white_24dp
@@ -1112,6 +1086,7 @@ drawable ic_check_black_24dp
 drawable ic_delete_black_24dp
 drawable ic_drag_handle_black_24dp
 drawable ic_edit_black_24dp
+drawable ic_launcher
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_menu_black_24dp
@@ -1189,7 +1164,6 @@ id bottom_sheet_shadow
 id bottom_sheet_shadow_view
 id btn_add_todo
 id buttonPanel
-id buttons_container
 id cancel_button
 id center
 id center_horizontal
@@ -1200,7 +1174,6 @@ id checkbox
 id chronometer
 id circular
 id clear_add_todo_controls
-id clear_view_todo_controls
 id clip_horizontal
 id clip_vertical
 id collapseActionView
@@ -1213,7 +1186,6 @@ id coordinator
 id custom
 id customPanel
 id custom_image
-id custom_view_container
 id decor_content_parent
 id default_activity_button
 id design_bottom_sheet
@@ -1227,6 +1199,7 @@ id disableHome
 id drawer
 id dynamic
 id edit_query
+id edit_view_todo_controls
 id end
 id enterAlways
 id enterAlwaysCollapsed
@@ -1284,7 +1257,6 @@ id nav_completed
 id nav_home
 id nav_view_main
 id navigation_header_container
-id neutral_button
 id never
 id none
 id normal
@@ -1308,6 +1280,7 @@ id right
 id right_icon
 id right_side
 id rv_todos
+id rv_todos_completed
 id save_image_matrix
 id save_non_transition_alpha
 id save_scale_type
@@ -1547,12 +1520,12 @@ string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
 string character_counter_content_description
 string character_counter_pattern
-string default_progressbar
 string description
 string dialog_cancel
 string dialog_default_title
 string dialog_ok
 string done
+string edit
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string hide_bottom_view_on_scroll_behavior
@@ -2073,8 +2046,7 @@ style Widget_MaterialProgressBar_ProgressBar_NoPadding
 style Widget_MaterialProgressBar_ProgressBar_Small
 style Widget_MaterialProgressBar_ProgressBar_Small_NoPadding
 style Widget_Support_CoordinatorLayout
-style alert_dialog_dark
-style alert_dialog_light
+style alert_dialog
 style dialog_blue_button
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
@@ -2134,10 +2106,10 @@ styleable MenuView android_windowAnimationStyle android_itemTextAppearance andro
 styleable NavigationView android_background android_fitsSystemWindows android_maxWidth elevation headerLayout itemBackground itemHorizontalPadding itemIconPadding itemIconTint itemTextAppearance itemTextColor menu
 styleable PopupWindow android_popupBackground android_popupAnimationStyle overlapAnchor
 styleable PopupWindowBackgroundState state_above_anchor
-styleable ProgressWheel matProg_barColor matProg_barSpinCycleTime matProg_barWidth matProg_circleRadius matProg_fillRadius matProg_linearProgress matProg_progressIndeterminate matProg_rimColor matProg_rimWidth matProg_spinSpeed
+styleable ProgressWheel barColor barSpinCycleTime barWidth circleRadius fillRadius progressIndeterminate rimColor rimWidth spinSpeed
 styleable RecycleListView paddingBottomNoButtons paddingTopNoTitle
 styleable RecyclerView android_orientation android_descendantFocusability fastScrollEnabled fastScrollHorizontalThumbDrawable fastScrollHorizontalTrackDrawable fastScrollVerticalThumbDrawable fastScrollVerticalTrackDrawable layoutManager reverseLayout spanCount stackFromEnd
-styleable Rotate3dAnimation customPivotX customPivotY fromDeg rollType toDeg
+styleable Rotate3dAnimation fromDeg pivotX pivotY rollType toDeg
 styleable ScrimInsetsFrameLayout insetForeground
 styleable ScrollingViewBehavior_Layout behavior_overlapTop
 styleable SearchView android_focusable android_maxWidth android_inputType android_imeOptions closeIcon commitIcon defaultQueryHint goIcon iconifiedByDefault layout queryBackground queryHint searchHintIcon searchIcon submitBackground suggestionRowLayout voiceIcon

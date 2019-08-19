@@ -20,7 +20,6 @@ import com.example.todox.models.TodoItem;
 import com.example.todox.services.ApplicationServices;
 import com.example.todox.services.TodoServices;
 import com.example.todox.utils.StructuredResponse;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -111,6 +110,8 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
 
 
                     } else {
+
+                        mRequestAction.onRequestStart(null);
                         mTodo_title.setPaintFlags(mTodo_title.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
                         mTodo_description.setPaintFlags(mTodo_description.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
                         mTv_todo_createdAt.setPaintFlags(mTv_todo_createdAt.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
@@ -118,8 +119,6 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
                         TodoItem todoItem = new TodoItem();
                         todoItem.setId(mTodoItem.getId());
                         todoItem.setCompleted(false);
-
-                        completeTodo(todoItem);
 
                         uncompleteTodo(todoItem);
                     }
@@ -197,14 +196,8 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
 
                         if(structuredResponse.status == (int)ApplicationServices.Constants.SUCCESS.getValue()) {
 
-                            Snackbar.make(itemView.findViewById(android.R.id.content), "Todo completed :D", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-
-                                }
-                            }).show();
-
                             mRequestAction.onRequestComplete(ApplicationServices.Constants.REQUESTEND_RELOAD);
+                            mRequestAction.onRequestCompleteMessage("Todo has been completed");
                         }
 
                     } catch (Exception e) {
@@ -214,7 +207,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
 
                 @Override
                 public void onFailure(Call<StructuredResponse> call, Throwable t) {
-
+                    mRequestAction.onRequestCompleteMessage("Action Failed");
                 }
             });
         }
@@ -236,15 +229,8 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
                         structuredResponse = response.body();
 
                         if(structuredResponse.status == (int)ApplicationServices.Constants.SUCCESS.getValue()) {
-
-                            Snackbar.make(itemView.findViewById(android.R.id.content), "Todo Uncompleted :D", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-
-                                }
-                            }).show();
-
                             mRequestAction.onRequestComplete(ApplicationServices.Constants.REQUESTEND_RELOAD);
+                            mRequestAction.onRequestCompleteMessage("Todo has been uncompleted");
                         }
 
                     } catch (Exception e) {
@@ -254,7 +240,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
 
                 @Override
                 public void onFailure(Call<StructuredResponse> call, Throwable t) {
-
+                    mRequestAction.onRequestCompleteMessage("Action Failed");
                 }
             });
         }
@@ -264,6 +250,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
 
             mTodo_title.setText(limitText(todoItem.getTitle(), 60));
             mTodo_description.setText(limitText(todoItem.getDescription(), 100));
+            mCheckBox.setChecked(todoItem.getIsCompleted());
 
             if(todoItem.getIsCompleted()) {
                 mTodo_title.setPaintFlags(mTodo_title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);

@@ -13,7 +13,7 @@ public class ApplicationServices {
     public static class WebService {
 
         private static Retrofit mRetrofit;
-        private static String BaseURL = "https://6edba7cd.ngrok.io";
+        private static String BaseURL = "https://dd456973.ngrok.io";
         private static String API_USERNAME = "test";
         private static String API_PASSWORD = "123456";
 

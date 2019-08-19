@@ -16,6 +16,18 @@
         "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/anim_error_frame_in.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/anim/error_frame_in.xml"
+    },
+    {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_warning_circle.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/drawable/warning_circle.xml"
+    },
+    {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_success_bow.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/drawable/success_bow.xml"
+    },
+    {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_abc_list_menu_item_radio.xml.flat",
         "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/5bf030364be1628a6f9f63ab6e371a98/appcompat-1.0.2/res/layout/abc_list_menu_item_radio.xml"
     },
@@ -32,24 +44,28 @@
         "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/5bf030364be1628a6f9f63ab6e371a98/appcompat-1.0.2/res/layout/select_dialog_multichoice_material.xml"
     },
     {
-        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_fragment_tasks.xml.flat",
-        "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/layout/fragment_tasks.xml"
-    },
-    {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_no_list.png.flat",
         "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/drawable/no_list.png"
     },
     {
-        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_abc_popup_menu_header_item_layout.xml.flat",
-        "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/5bf030364be1628a6f9f63ab6e371a98/appcompat-1.0.2/res/layout/abc_popup_menu_header_item_layout.xml"
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_fragment_tasks.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/layout/fragment_tasks.xml"
     },
     {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/menu_menu_bottom_nav.xml.flat",
         "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/menu/menu_bottom_nav.xml"
     },
     {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_abc_popup_menu_header_item_layout.xml.flat",
+        "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/5bf030364be1628a6f9f63ab6e371a98/appcompat-1.0.2/res/layout/abc_popup_menu_header_item_layout.xml"
+    },
+    {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher_round.png.flat",
         "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_error_center_x.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/drawable/error_center_x.xml"
     },
     {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_design_navigation_menu_item.xml.flat",
@@ -144,6 +160,10 @@
         "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/5bf030364be1628a6f9f63ab6e371a98/appcompat-1.0.2/res/layout/abc_screen_simple.xml"
     },
     {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/anim_error_x_in.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/anim/error_x_in.xml"
+    },
+    {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_abc_search_view.xml.flat",
         "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/5bf030364be1628a6f9f63ab6e371a98/appcompat-1.0.2/res/layout/abc_search_view.xml"
     },
@@ -168,8 +188,16 @@
         "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/layout/activity_main_content.xml"
     },
     {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_blue_button_background.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/drawable/blue_button_background.xml"
+    },
+    {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout-sw600dp-v13_mtrl_layout_snackbar.xml.flat",
         "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/16e34cc941ca560f1ce786850088f542/material-1.0.0/res/layout-sw600dp-v13/mtrl_layout_snackbar.xml"
+    },
+    {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/anim_success_bow_roate.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/anim/success_bow_roate.xml"
     },
     {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_design_layout_snackbar.xml.flat",
@@ -192,6 +220,10 @@
         "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/5bf030364be1628a6f9f63ab6e371a98/appcompat-1.0.2/res/layout/abc_cascading_menu_item_layout.xml"
     },
     {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/anim_modal_out.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/anim/modal_out.xml"
+    },
+    {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_abc_action_bar_up_container.xml.flat",
         "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/5bf030364be1628a6f9f63ab6e371a98/appcompat-1.0.2/res/layout/abc_action_bar_up_container.xml"
     },
@@ -208,8 +240,16 @@
         "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/drawable/ic_check_black_24dp.xml"
     },
     {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/anim_modal_in.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/anim/modal_in.xml"
+    },
+    {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/menu_menu_todolist_options.xml.flat",
         "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/menu/menu_todolist_options.xml"
+    },
+    {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_success_circle.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/drawable/success_circle.xml"
     },
     {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_abc_popup_menu_item_layout.xml.flat",
@@ -224,12 +264,20 @@
         "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/16e34cc941ca560f1ce786850088f542/material-1.0.0/res/layout/design_layout_tab_text.xml"
     },
     {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/anim_success_mask_layout.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/anim/success_mask_layout.xml"
+    },
+    {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_ic_cancel_white_24dp.xml.flat",
         "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/drawable/ic_cancel_white_24dp.xml"
     },
     {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_abc_search_dropdown_item_icons_2line.xml.flat",
         "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/5bf030364be1628a6f9f63ab6e371a98/appcompat-1.0.2/res/layout/abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_ic_remove_black_24dp.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/drawable/ic_remove_black_24dp.xml"
     },
     {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_fragment_completed_tasks.xml.flat",
@@ -242,10 +290,6 @@
     {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_abc_list_menu_item_icon.xml.flat",
         "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/5bf030364be1628a6f9f63ab6e371a98/appcompat-1.0.2/res/layout/abc_list_menu_item_icon.xml"
-    },
-    {
-        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_ic_remove_black_24dp.xml.flat",
-        "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/drawable/ic_remove_black_24dp.xml"
     },
     {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_ic_add_white_24dp.xml.flat",
@@ -272,6 +316,10 @@
         "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/5bf030364be1628a6f9f63ab6e371a98/appcompat-1.0.2/res/layout-v26/abc_screen_toolbar.xml"
     },
     {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_dialog_background.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/drawable/dialog_background.xml"
+    },
+    {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_design_layout_snackbar_include.xml.flat",
         "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/16e34cc941ca560f1ce786850088f542/material-1.0.0/res/layout/design_layout_snackbar_include.xml"
     },
@@ -285,7 +333,7 @@
     },
     {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_alert_dialog.xml.flat",
-        "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/4c129bc6d725e8bfbecf16283500d9c2/library-1.6.2/res/layout/alert_dialog.xml"
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/layout/alert_dialog.xml"
     },
     {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_mtrl_layout_snackbar_include.xml.flat",
@@ -324,6 +372,10 @@
         "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
     },
     {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_gray_button_background.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/drawable/gray_button_background.xml"
+    },
+    {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_abc_action_menu_layout.xml.flat",
         "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/5bf030364be1628a6f9f63ab6e371a98/appcompat-1.0.2/res/layout/abc_action_menu_layout.xml"
     },
@@ -338,6 +390,10 @@
     {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_drawable_toolbar_shadow.xml.flat",
         "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/drawable/drawable_toolbar_shadow.xml"
+    },
+    {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_warning_sigh.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/drawable/warning_sigh.xml"
     },
     {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_layout_todolist.xml.flat",
@@ -384,6 +440,10 @@
         "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/drawable/ic_more_vert_black_24dp.xml"
     },
     {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_error_circle.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/drawable/error_circle.xml"
+    },
+    {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_abc_screen_toolbar.xml.flat",
         "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/5bf030364be1628a6f9f63ab6e371a98/appcompat-1.0.2/res/layout/abc_screen_toolbar.xml"
     },
@@ -402,6 +462,10 @@
     {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_shape_gradient_top_shadow.xml.flat",
         "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/drawable/shape_gradient_top_shadow.xml"
+    },
+    {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_red_button_background.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/sweetalert/build/intermediates/packaged_res/debug/drawable/red_button_background.xml"
     },
     {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/layout_abc_screen_simple_overlay_action_mode.xml.flat",

@@ -6,4 +6,5 @@ public interface RequestAction {
     void onRequestStart(Object object);
     void onRequestEnd(Object object);
     void onRequestComplete(ApplicationServices.Constants constant);
+    void onRequestCompleteMessage(String message);
 }
