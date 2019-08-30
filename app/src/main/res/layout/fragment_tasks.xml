@@ -3,6 +3,13 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        style="@style/TextAppearance.AppCompat.Medium.DefaultText"
+        android:text="ALL TODOS"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_todos"
         android:layout_width="match_parent"

@@ -8,4 +8,5 @@
     <color name="colorWhite">#fff</color>
     <color name="colorBlack">#000</color>
     <color name="colorToolbar">#1BA0E3</color>
+    <color name="colorSuccess">#5BBE5F</color>
 </resources>

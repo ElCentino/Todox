@@ -104,6 +104,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
 
                         TodoItem todoItem = new TodoItem();
                         todoItem.setId(mTodoItem.getId());
+                        todoItem.setUserId(ApplicationServices.SharedPreferenceHelper.getInstance().getUserId(itemView.getContext()));
                         todoItem.setCompleted(true);
 
                         completeTodo(todoItem);
@@ -118,6 +119,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
 
                         TodoItem todoItem = new TodoItem();
                         todoItem.setId(mTodoItem.getId());
+                        todoItem.setUserId(ApplicationServices.SharedPreferenceHelper.getInstance().getUserId(itemView.getContext()));
                         todoItem.setCompleted(false);
 
                         uncompleteTodo(todoItem);

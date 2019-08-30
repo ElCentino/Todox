@@ -16,6 +16,14 @@
         <item name="android:paddingLeft">21dp</item>
         <item name="android:paddingRight">21dp</item>
         <item name="android:textColor">@color/button_text_color</item>
+    </style><style name="dialog_blue_red" parent="android:Widget.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/red_btn_bg_pressed_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingLeft">21dp</item>
+        <item name="android:paddingRight">21dp</item>
+        <item name="android:textColor">@color/button_text_color</item>
     </style></file><file path="/Users/richardpryce/Documents/workspace/TodoX/sweetalert/src/main/res/values/strings.xml" qualifiers=""><string name="app_name">SweetAlertDialog</string><string name="dialog_default_title">Here\'s a message!</string><string name="dialog_ok">OK</string><string name="dialog_cancel">Cancel</string><string name="LOADING">Loading...</string></file><file path="/Users/richardpryce/Documents/workspace/TodoX/sweetalert/src/main/res/values/attrs.xml" qualifiers=""><declare-styleable name="Rotate3dAnimation">
         <attr format="enum" name="rollType">
             <enum name="x" value="0"/>

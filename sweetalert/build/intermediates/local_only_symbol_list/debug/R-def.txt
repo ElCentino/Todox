@@ -69,4 +69,5 @@ string dialog_default_title
 string dialog_ok
 style alert_dialog
 style dialog_blue_button
+style dialog_blue_red
 styleable Rotate3dAnimation rollType fromDeg toDeg pivotX pivotY

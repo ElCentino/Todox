@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/menu_add_todo"
-        android:title="Add Todo"
-        android:icon="@drawable/ic_add_white_24dp" app:showAsAction="always" android:iconTint="@color/colorWhite" />
+
+    <item android:id="@+id/menu_settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings_white_24dp" app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_clear_todos"
+        android:title="Clear Todos"
+        android:icon="@drawable/ic_settings_white_24dp" app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_login"
+        android:title="Login"
+        android:icon="@drawable/ic_add_white_24dp" app:showAsAction="never" android:iconTint="@color/colorWhite" />
 </menu>

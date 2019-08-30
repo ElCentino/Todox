@@ -652,6 +652,7 @@ color colorBlack
 color colorDanger
 color colorPrimary
 color colorPrimaryDark
+color colorSuccess
 color colorToolbar
 color colorWhite
 color design_bottom_navigation_shadow_color
@@ -1096,6 +1097,7 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_remove_black_24dp
+drawable ic_settings_white_24dp
 drawable ic_view_list_black_24dp
 drawable mtrl_snackbar_background
 drawable mtrl_tabs_default_indicator
@@ -1177,6 +1179,7 @@ id clear_add_todo_controls
 id clip_horizontal
 id clip_vertical
 id collapseActionView
+id completed_pane
 id confirm_button
 id container
 id content
@@ -1208,6 +1211,7 @@ id error_x
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
+id fab
 id fill
 id fill_horizontal
 id fill_vertical
@@ -1244,8 +1248,10 @@ id loading
 id mask_left
 id mask_right
 id masked
-id menu_add_todo
+id menu_clear_todos
 id menu_delete_todo
+id menu_login
+id menu_settings
 id menu_view_todo
 id message
 id middle
@@ -1789,6 +1795,7 @@ style TextAppearance_AppCompat_Light_SearchResult_Title
 style TextAppearance_AppCompat_Light_Widget_PopupMenu_Large
 style TextAppearance_AppCompat_Light_Widget_PopupMenu_Small
 style TextAppearance_AppCompat_Medium
+style TextAppearance_AppCompat_Medium_DefaultText
 style TextAppearance_AppCompat_Medium_Inverse
 style TextAppearance_AppCompat_Menu
 style TextAppearance_AppCompat_SearchResult_Subtitle
@@ -2048,6 +2055,7 @@ style Widget_MaterialProgressBar_ProgressBar_Small_NoPadding
 style Widget_Support_CoordinatorLayout
 style alert_dialog
 style dialog_blue_button
+style dialog_blue_red
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth

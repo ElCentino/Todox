@@ -420,6 +420,10 @@
         "source": "/Users/richardpryce/.gradle/caches/transforms-2/files-2.1/c9abde3d00d5c35e349279d839666d3e/core-1.0.1/res/layout/notification_template_part_chronometer.xml"
     },
     {
+        "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_ic_settings_white_24dp.xml.flat",
+        "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/drawable/ic_settings_white_24dp.xml"
+    },
+    {
         "merged": "/Users/richardpryce/Documents/workspace/TodoX/app/build/intermediates/res/merged/debug/drawable_ic_edit_black_24dp.xml.flat",
         "source": "/Users/richardpryce/Documents/workspace/TodoX/app/src/main/res/drawable/ic_edit_black_24dp.xml"
     },

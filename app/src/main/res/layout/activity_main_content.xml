@@ -20,6 +20,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorAmbient"
             android:fitsSystemWindows="true"
+            android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"
             android:layout_alignParentTop="true" />
 
         <me.zhanghai.android.materialprogressbar.MaterialProgressBar
@@ -51,8 +52,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-
 
             <FrameLayout android:id="@+id/fragment_container"
                 android:layout_width="match_parent"
@@ -117,6 +116,17 @@
                     app:menu="@menu/menu_bottom_nav" />
 
             </LinearLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/bottom_nav_container"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_add_white_24dp"
+                android:layout_margin="20dp"
+                app:layout_anchor="@id/bottom_nav_container" />
+
         </RelativeLayout>
 
         <View

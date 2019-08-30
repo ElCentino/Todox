@@ -16,11 +16,11 @@ import retrofit2.http.Path;
 
 public interface TodoServices {
 
-    @GET("/mobile/api/todos/get")
-    Call<List<TodoItem>> GetTodos(@Header("Authorization") String authkey);
+    @GET("/mobile/api/todos/get/{UserId}")
+    Call<List<TodoItem>> GetTodos(@Header("Authorization") String authkey, @Path("UserId") String UserId);
 
-    @GET("/mobile/api/todos/get/completed")
-    Call<List<TodoItem>> GetCompletedTodods(@Header("Authorization") String authkey);
+    @GET("/mobile/api/todos/get/completed/{UserId}")
+    Call<List<TodoItem>> GetCompletedTodods(@Header("Authorization") String authkey, @Path("UserId") String UserId);
 
     @POST("/mobile/api/todos/add")
     Call<StructuredResponse> AddTodo(@Header("Authorization") String authkey, @Body TodoItem todoItem);
@@ -34,6 +34,6 @@ public interface TodoServices {
     @PUT("/mobile/api/todos/update")
     Call<StructuredResponse> UpdateTodo(@Header("Authorization") String authkey, @Body TodoItem todoItem);
 
-    @DELETE("/mobile/api/todos/delete/{todoId}")
-    Call<StructuredResponse> DeleteTodo(@Header("Authorization") String authKey, @Path("todoId") String todoId);
+    @DELETE("/mobile/api/todos/delete/{todoId}/{UserId}")
+    Call<StructuredResponse> DeleteTodo(@Header("Authorization") String authKey, @Path("todoId") String todoId, @Path("UserId") String UserId);
 }

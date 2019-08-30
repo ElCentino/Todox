@@ -1,7 +1,10 @@
 package com.example.todox.services;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Base64;
 
 import java.io.UnsupportedEncodingException;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -13,7 +16,7 @@ public class ApplicationServices {
     public static class WebService {
 
         private static Retrofit mRetrofit;
-        private static String BaseURL = "https://dd456973.ngrok.io";
+        private static String BaseURL = "https://api.elcentino.com";
         private static String API_USERNAME = "test";
         private static String API_PASSWORD = "123456";
 
@@ -57,6 +60,7 @@ public class ApplicationServices {
     public static class Literals {
         public static String ADD_TODO = "0001";
         public static String EDIT_TODO = "0002";
+        public static final String PREFERENCE_FILE_KEY = "TodoxSharePrefKey";
     }
 
     public enum Constants {
@@ -81,4 +85,46 @@ public class ApplicationServices {
             return this.value;
         }
     }
+
+    public static class SharedPreferenceHelper {
+
+        private static SharedPreferenceHelper sharedPreferenceHelper;
+
+        private SharedPreferenceHelper() {
+
+        }
+
+        public static SharedPreferenceHelper getInstance() {
+
+            if(sharedPreferenceHelper == null) {
+                sharedPreferenceHelper = new SharedPreferenceHelper();
+            }
+
+            return sharedPreferenceHelper;
+        }
+
+        public void saveUserId(Context context) {
+
+            SharedPreferences sharedPreferences = context.getSharedPreferences(ApplicationServices.Literals.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("userId", UUID.randomUUID().toString());
+            editor.commit();
+        }
+
+        public String getUserId(Context context) {
+
+            SharedPreferences sharedPreferences = context.getSharedPreferences(ApplicationServices.Literals.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+
+            return sharedPreferences.getString("userId", "");
+        }
+
+        public void clearSharedPreference(Context context) {
+
+            SharedPreferences sharedPreferences = context.getSharedPreferences(Literals.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+
+            sharedPreferences.edit().clear();
+        }
+    }
+
 }

@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private TasksFragment mTasksFragment;
     private InputMethodManager mImm;
     private CompletedTasksFragment mCompletedTasksFragment;
+    private View mCompleted_pane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +112,30 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         mTodoServices = ApplicationServices.WebService.getInstance().create(TodoServices.class);
 
+        if(ApplicationServices.SharedPreferenceHelper.getInstance().getUserId(this) == "") {
+            ApplicationServices.SharedPreferenceHelper.getInstance().saveUserId(this);
+        }
+
         getTodos();
         getCompletedTodos();
+
+        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                if(view_todo_layout_bottom_sheet.getState() != BottomSheetBehavior.STATE_HIDDEN) {
+                    view_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
+
+                if(add_todo_layout_bottom_sheet.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                    return;
+                }
+
+                add_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+            }
+        });
 
     }
 
@@ -120,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         onRequestStart(null);
 
-        mTodoServices.GetTodos(ApplicationServices.WebService.getAuthToken()).enqueue(new Callback<List<TodoItem>>() {
+        mTodoServices.GetTodos(ApplicationServices.WebService.getAuthToken(), ApplicationServices.SharedPreferenceHelper.getInstance().getUserId(this)).enqueue(new Callback<List<TodoItem>>() {
 
             @Override
             public void onResponse(Call<List<TodoItem>> call, Response<List<TodoItem>> response) {
@@ -134,6 +157,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
                 List<TodoItem> items = response.body();
                 mTodoItems = items;
+
+                if(items == null) {
+                    Snackbar.make(findViewById(android.R.id.content), "No Internet Connection", Snackbar.LENGTH_LONG).show();
+                    items = new ArrayList<>();
+                }
+
                 TasksFragment tasksFragment = new TasksFragment((ArrayList<TodoItem>) items);
                 tasksFragment.setTodoViewed(MainActivity.this);
 //                tasksFragment.setRequestAction(MainActivity.this);
@@ -160,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         onRequestStart(null);
 
-        mTodoServices.GetCompletedTodods(ApplicationServices.WebService.getAuthToken()).enqueue(new Callback<List<TodoItem>>() {
+        mTodoServices.GetCompletedTodods(ApplicationServices.WebService.getAuthToken(), ApplicationServices.SharedPreferenceHelper.getInstance().getUserId(this)).enqueue(new Callback<List<TodoItem>>() {
 
             @Override
             public void onResponse(Call<List<TodoItem>> call, Response<List<TodoItem>> response) {
@@ -174,6 +203,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
                 List<TodoItem> items = response.body();
                 mCompletedTodoItems = items;
+
+                if(items == null) {
+                    Snackbar.make(findViewById(android.R.id.content), "No Internet Connection", Snackbar.LENGTH_LONG).show();
+                    items = new ArrayList<>();
+                }
+
                 CompletedTasksFragment completedTasksFragment = new CompletedTasksFragment((ArrayList<TodoItem>) items);
                 completedTasksFragment.setTodoViewed(MainActivity.this);
 //                tasksFragment.setRequestAction(MainActivity.this);
@@ -287,17 +322,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         switch (item.getItemId()) {
 
-            case R.id.menu_add_todo:
-
-                if(view_todo_layout_bottom_sheet.getState() != BottomSheetBehavior.STATE_HIDDEN) {
-                    view_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_HIDDEN);
-                }
-
-                if(add_todo_layout_bottom_sheet.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-                    return true;
-                }
-
-                add_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            case R.id.menu_clear_todos:
+                ApplicationServices.SharedPreferenceHelper.getInstance().clearSharedPreference(this);
                 return true;
 
             default:
@@ -361,6 +387,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         view_todo_edit_pane = findViewById(R.id.view_todo_edit_pane);
 
+        mCompleted_pane = findViewById(R.id.completed_pane);
+        mCompleted_pane.setVisibility(View.INVISIBLE);
+
         view_todo_layout_bottom_sheet.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View view, int i) {
@@ -402,6 +431,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 TodoItem todoItem = new TodoItem();
                 todoItem.setId(tempId);
                 todoItem.setTitle(mTv_view_title.getText().toString());
+                todoItem.setUserId(ApplicationServices.SharedPreferenceHelper.getInstance().getUserId(MainActivity.this));
                 todoItem.setDescription(mTv_view_description.getText().toString());
 
                 mTodoServices.UpdateTodo(ApplicationServices.WebService.getAuthToken(), todoItem).enqueue(new Callback<StructuredResponse>() {
@@ -493,7 +523,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             public void onClick(View view) {
 
                 SweetAlertDialog dialog = new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE)
-                        .setContentText("Add This Todo")
+                        .setContentText("Do you want to add this to your list of todos ?")
+                        .setTitleText("ADD TODO ?")
                         .setCancelText("Cancel")
                         .setConfirmText("Add")
                         .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -516,10 +547,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
                                 TodoItem todoItem = new TodoItem();
                                 todoItem.setId(UUID.randomUUID().toString());
+                                todoItem.setUserId(ApplicationServices.SharedPreferenceHelper.getInstance().getUserId(MainActivity.this));
                                 todoItem.setTitle(title);
                                 todoItem.setDescription(description);
 
                                 addTodo(todoItem);
+                                sweetAlertDialog.dismiss();
+
+                                mTv_todo_title.setText("");
                             }
                         })
                         .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -573,6 +608,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mTv_view_title.setText(todoItem.getTitle());
         mTv_view_description.setText(todoItem.getDescription());
         tempId = todoItem.getId();
+
+        if(todoItem.getIsCompleted()) {
+            mCompleted_pane.setVisibility(View.VISIBLE);
+        } else {
+            mCompleted_pane.setVisibility(View.INVISIBLE);
+        }
         view_todo_layout_bottom_sheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
@@ -582,27 +623,30 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
 
         SweetAlertDialog dialog = new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE)
-                .setContentText("Add This Todo")
+                .setContentText("Do you want to delete todo ?")
+                .setTitleText("DELETE TODO ?")
                 .setCancelText("Cancel")
-                .setConfirmText("Add")
+                .setConfirmText("Delete")
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    public void onClick(final SweetAlertDialog sweetAlertDialog) {
 
                         onRequestStart(null);
 
-                        mTodoServices.DeleteTodo(ApplicationServices.WebService.getAuthToken(), todoItem.getId()).enqueue(new Callback<StructuredResponse>() {
+                        mTodoServices.DeleteTodo(ApplicationServices.WebService.getAuthToken(), todoItem.getId(), todoItem.getUserId()).enqueue(new Callback<StructuredResponse>() {
                             @Override
                             public void onResponse(Call<StructuredResponse> call, Response<StructuredResponse> response) {
 
                                 onRequestEnd(null);
                                 onRequestComplete(ApplicationServices.Constants.REQUESTEND_RELOAD);
                                 onRequestCompleteMessage("Todo Deleted");
+                                sweetAlertDialog.dismiss();
                             }
 
                             @Override
                             public void onFailure(Call<StructuredResponse> call, Throwable t) {
                                 onRequestCompleteMessage("Action Failed");
+                                sweetAlertDialog.dismiss();
                             }
                         });
                     }

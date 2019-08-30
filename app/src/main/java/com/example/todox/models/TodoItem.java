@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class TodoItem {
 
+    private String UserId;
     private String Id;
     private String Title;
     private String Description;
@@ -17,6 +18,14 @@ public class TodoItem {
 
     public void setUpdatedAt(Date updatedAt) {
         UpdatedAt = updatedAt;
+    }
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
     }
 
     private Date UpdatedAt;

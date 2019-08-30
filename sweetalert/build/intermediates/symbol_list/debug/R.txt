@@ -1261,6 +1261,7 @@ int style Widget_Compat_NotificationActionText 0x7f150168
 int style Widget_Support_CoordinatorLayout 0x7f150169
 int style alert_dialog 0x7f15016a
 int style dialog_blue_button 0x7f15016b
+int style dialog_blue_red 0x7f15016c
 int[] styleable ActionBar { 0x7f040032, 0x7f040033, 0x7f040034, 0x7f04005d, 0x7f04005e, 0x7f04005f, 0x7f040060, 0x7f040061, 0x7f040062, 0x7f040065, 0x7f04006b, 0x7f04006c, 0x7f040077, 0x7f040089, 0x7f04008a, 0x7f04008b, 0x7f04008c, 0x7f04008d, 0x7f040092, 0x7f040095, 0x7f0400ab, 0x7f0400b3, 0x7f0400c1, 0x7f0400c4, 0x7f0400c5, 0x7f0400e7, 0x7f0400ea, 0x7f040105, 0x7f04010e }
 int styleable ActionBar_background 0
 int styleable ActionBar_backgroundSplit 1
